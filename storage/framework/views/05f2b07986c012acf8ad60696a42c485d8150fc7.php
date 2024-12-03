@@ -1,0 +1,201 @@
+<?php $__env->startSection('head'); ?>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+		<div class="container" >
+			
+			<div class="row">
+				<div class="col-md-10" align="center">
+				<h4><b>RATINGS of <?php echo e($student->fname); ?> <?php echo e($student->mname); ?> <?php echo e($student->lname); ?> <?php echo e($student->suffix); ?></b></h4>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+			<h4>PREVIOUS RATINGS</h4>
+			</div>
+			<div class="row">
+				<div class="col-md-2">
+					<b>Year Level:</b> <?php echo e($lvl); ?>  <?php if($student->scholartype==1): ?>=<?php echo e($lvlper); ?>%<?php endif; ?>
+					</div>
+				<div class="col-md-2">
+					<b>Examination:</b> <?php echo e($student->result_exam); ?>%
+					</div>
+				<div class="col-md-2">
+					<b>Interview(PEDO):</b> <?php echo e($student->result_interview); ?>%
+					</div>
+					<div class="col-md-2">
+						<b>Interview(INYDO):</b> <?php echo e($student->result_interview1); ?>%
+						</div>
+				<div class="col-md-2">
+						<b>Previous Grade:</b> <?php echo e($student->pgrade); ?>
+
+					</div>
+			</div>
+			<div class="row" align="center">
+				<div class="col-md-10">
+				<h3>Total Percentage:<b>
+					<?php if($student->scholartype==1): ?>
+					<?php echo e(($lvlper+$student->result_exam+$student->result_interview+$student->pgrade+$student->result_interview1)/5); ?>%
+					<?php else: ?>
+					<?php echo e((40*$student->result_interview/100)+(15*$student->pgrade/100)+(30*$student->result_interview1/100)+(15*$student->result_exam/100)); ?>%
+					<?php endif; ?>
+					</b>
+				</h3>
+				</div>
+			</div>
+			<br><br><br><br>
+			<div class="row"><h4>New Rating</h4></div>
+			<br>
+		<form method="POST" action="/ratingresult">
+			<div class="row">
+
+					<div class="form-group col-md-3">
+							<div class="form-group">
+								<div class="input-group">
+										<span class="input-group-addon"><b>Examination Result</b></span>
+										<input type="number" step=".01" id="exam" name="exam" class="form-control mx-sm-1" placeholder="0.00" value="<?php echo e($student->result_exam); ?>">
+									</div>
+							</div>
+							</div>
+
+					<div class="form-group col-md-3">
+						<div class="form-group">
+								<div class="input-group">
+										<span class="input-group-addon"><b>Interview(PED)</b></span>
+										<input type="number" step=".01" id="inter" name="inter" class="form-control mx-sm-1" placeholder="0.00" value="<?php echo e($student->result_interview); ?>">
+									  </div>
+							</div>
+						</div>
+					<div class="form-group col-md-3">
+							<div class="form-group">
+									<div class="input-group">
+											<span class="input-group-addon"><b>Interview(INYDO)</b></span>
+											<input type="number" step=".01" id="inter1" name="inter1" class="form-control mx-sm-1" placeholder="0.00" value="<?php echo e($student->result_interview1); ?>">
+										  </div>
+								</div>
+							</div>
+					
+				</div>	
+				<div class="row">
+					<div class="form-group col-md-3">
+									<div class="form-group">
+											<div class="input-group">
+													<span class="input-group-addon"><b>Prev Grade</b></span>
+													<input type="number" step=".01" id="pg" name="pg" class="form-control mx-sm-1" placeholder="0.00" value="<?php echo e($student->pgrade); ?>">
+												  </div>
+										</div>
+									</div>						
+			<?php if($student->scholartype==4): ?>	
+			<div class="form-group col-md-3">
+				<div class="form-group">
+					<div class="input-group">
+					<span class="input-group-addon"><b>Grade Lvl</b></span>
+					<select id="gl" name="gl" class="form-control">
+					<option value="">------</option>
+					<option value="11">Grade 11</option>
+					<option value="12">Grade 12</option>
+					</select>
+				</div>
+			</div>			
+			<?php endif; ?>			
+				</div>
+			<div class="row">
+			<div class="form-group col-md-3">
+				<div class="form-group">
+					<div class="input-group">
+					<span class="input-group-addon"><b>Intial Interviewer:</b></span>
+					<select id="pers" name="pers" class="form-control">
+					<option value="">------</option>
+					<option value="ate a">Arlene</option>
+					<option value="bedz">Benedict</option>
+					<option value="maam c">Carolyn</option>
+					<option value="jam">Jamaica</option>
+					<option value="majoy">Mae-Joy</option>
+					<option value="nats">Nathan</option>
+					<option value="pswd">PSWD</option>
+					<option value="other">Other</option>
+					</select>
+				</div>
+			</div>			
+			</div>
+			<div class="row">
+				<div class="col-md-10">
+					<h3>Exam Points</h3>
+				</div>
+			</div>
+			<div class="row">
+					<div class="form-group col-md-2">
+							<div class="form-group">
+								<div class="input-group">
+										<span class="input-group-addon"><b>Sentence</b></span>
+										<input type="number" step=".01" id="sen" name="sen" class="form-control mx-sm-1" placeholder="0.00" ">
+									</div>
+							</div>
+						</div>
+					<div class="form-group col-md-2">
+							<div class="form-group">
+								<div class="input-group">
+										<span class="input-group-addon"><b>Antonym</b></span>
+										<input type="number" step=".01" id="anto" name="anto" class="form-control mx-sm-1" placeholder="0.00" ">
+									</div>
+							</div>
+						</div>
+				<div class="form-group col-md-2">
+								<div class="form-group">
+									<div class="input-group">
+											<span class="input-group-addon"><b>Analogy</b></span>
+											<input type="number" step=".01" id="ana" name="ana" class="form-control mx-sm-1" placeholder="0.00"">
+										</div>
+								</div>
+							</div>
+				<div class="form-group col-md-2">
+								<div class="form-group">
+									<div class="input-group">
+											<span class="input-group-addon"><b>Synonym</b></span>
+											<input type="number" step=".01" id="syn" name="syn" class="form-control mx-sm-1" placeholder="0.00"">
+										</div>
+								</div>
+							</div>
+				<div class="form-group col-md-2">
+										<div class="form-group">
+											<div class="input-group">
+													<span class="input-group-addon"><b>Numeric</b></span>
+													<input type="number" step=".01" id="num" name="num" class="form-control mx-sm-1" placeholder="0.00">
+												</div>
+										</div>
+									</div>
+			</div>
+
+			<div class="row">
+					<div class="form-group col-md-2">
+							<div class="form-group">
+								<div class="input-group">
+										<span class="input-group-addon"><b>Ilocos Norte</b></span>
+										<input type="number" step=".01" id="in" name="in" class="form-control mx-sm-1" placeholder="0.00">
+									</div>
+							</div>
+						</div>
+			</div>
+
+			<div class="row">
+					<?php echo e(csrf_field()); ?>
+
+					<input type="hidden" value="<?php echo e($student->id); ?>" name="student" id="student" />
+					<input type="hidden" value="<?php echo e($lvlper); ?>" name="ylper" id="ylper" />
+					<input type="hidden" value="<?php echo e($student->pgrade); ?>" name="pgrade" id="pgrade" />
+					<div class="col-md-8" align="center">
+						<a href="/student/<?php echo e($student->id); ?>" class="btn btn-danger" role="button">Back</a>
+						<button type="submit" class="btn btn-primary btn-md">Submit</button>
+					</div>
+				</div>
+		</form>
+		</div>
+		
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+	
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
